@@ -1,11 +1,11 @@
 ---
 name: editorial-ig-photos
-description: Generate aesthetically pleasing, IG-ready photorealistic photos (people, pets, hands holding objects, places) with Midjourney-level quality from Nano Banana, without the AI-slop look. One house-style prompt block (single visible light source, dark falloff, 50mm off-centre, Portra grade), the same subject kept across a post, and a vignette + grain finish done in code. Use when making photos for Instagram/TikTok posts, reels, carousels, story templates, app marketing or seeded content, or whenever generated photos "look like AI slop", "look fake", "aren't IG-ready". Not for candid iPhone/flash UGC (use last-summer-ugc-slides) or video (ugc-dance-video).
+description: Generate aesthetically pleasing, IG-ready photorealistic photos (people, pets, hands holding objects, places) with Midjourney-level quality from Nano Banana, without the AI-slop look. Bright, glamorous lifestyle sets (party, city, ocean, travel) written per post as one story, the same cast kept across a post, and a vignette + grain finish done in code. Use when making photos for Instagram/TikTok posts, reels, carousels, story templates, app marketing or seeded content, or whenever generated photos "look like AI slop", "look fake", "aren't IG-ready". Not for candid iPhone/flash UGC (use last-summer-ugc-slides) or video (ugc-dance-video).
 ---
 
 # Editorial IG photos
 
-The approved look: photos that could run on a photographer's Instagram. Each has one subject, one beautiful visible light source, darkness everywhere else, a warm film grade and a calm off-centre frame. The user's verdict on the first batch made this way was "love the quality".
+The approved look: glamorous, sunlit, aspirational photos that could run on a top lifestyle photographer's Instagram, each set telling one story. The user's verdict on the first batch made this way was "love the quality".
 
 ## Why it works
 
@@ -19,32 +19,37 @@ These looks were rejected, so never use them:
 
 ## 1. Write each prompt in this order
 
-```
-A photograph for a beautiful Instagram feed, shot by a fine-art <pet|lifestyle|food|travel> photographer.
-<SUBJECT with 2–4 fixed identifying details> <one action>, <gaze off the lens: looking to the side / back over the shoulder / eyes closed>.
-<ONE visible light source> is the only light: <where it falls on the subject>, and <the rest> falls off into deep (warm) shadow.
-50mm lens at f/1.8, <height/angle>, the subject off-centre with dark negative space <above/around>.
-Warm highlights, cool deep shadows, Kodak Portra 400 colour, <quiet and cinematic | calm and intimate | gentle lens flare>.
-Only the <subject>, nothing else in the frame. Natural <fur|skin> texture<, minimal retouching, not glossy>, a real photograph.
-<Adults only.> No text, no logos, no watermark, no borders.
-```
+**Default look: bright, glamorous, aspirational.** The photos showcase whatever they're for (a template, an app, a brand), so each post's set is one IG-worthy story: lifestyle, parties, the city centre, the ocean, travel, adventure. They're sunlit or golden hour by default, and night only for parties and city scenes, using flash and glowing city lights.
 
-Good light sources, each named as "the only light":
-- a low window shaft
-- a single warm lamp just out of frame
-- candles
-- low sun behind the subject, giving rim light and backlit leaves or grass
-- golden sun through a door's glass panel
+```
+A photograph for a beautiful, aspirational Instagram feed, shot by a top lifestyle and fashion photographer.
+<NAMED SUBJECT, age, 2–4 fixed details: hair, outfit, jewellery> <one glamorous action> in <a specific beautiful place>, <natural gaze: laughing with friends, looking out at the view, mid-step>.
+<LIGHT: bright midday sun and blue sky | warm golden-hour sun from the side | direct on-camera flash with city lights glowing behind>.
+<35mm for scenes, 50mm for people>, <framing>.
+Vivid but natural colour, Kodak Portra 400, crisp, glamorous, effortless. Natural skin texture, not glossy, not posed at the lens.
+Adults only. No text, no logos, no watermark, no borders.
+```
 
 Rules:
-- **One subject per photo.** Allow at most one supporting prop: a lead, a blanket, a film camera.
-- **Faces:** at most one clear face per post. Otherwise use profiles, backs, hands and over-the-shoulder looks. Never have the subject look into the lens.
-- Use 85mm for running animals or tight portraits, and 50mm for everything else.
+- **One location and one cast per post,** so the set reads as a story. Use the same named person or friends in every shot of the post (repeat the description word for word), and a different cast in every post.
+- **Pick each shot for what it showcases.** A party template gets the party, a magazine template gets a cover-worthy portrait, a travel template gets the ocean.
+- The **"one visible light source + dark falloff"** look (the d02c candle shots) is a variant for candle or night-intimate moments only. **Never apply it to a whole batch.** In 2026-11 it turned 400 photos gloomy and grungy, and they were rejected and wasted.
 - Don't ask for grain or "film look" in the prompt. That's handled in step 3.
+- **Never bulk-wrap someone's old briefs in a style block.** Write each post's set yourself, and show a 2-post pilot before any run over ~20 images.
+
+## People: faces and eyes (the hardest part)
+
+AI eyes are the number-one giveaway. What was learned on 2026-11-22, after many rejected rounds:
+
+- **The cause is small faces.** A group of 4–5 people at mid-distance gives each face a few dozen pixels, and every model (NB 2.1, NB Pro, GPT Image 2.6, Soul) draws glassy, cloned eyes at that size. No eye wording fixes it: "squinting, laugh lines, little makeup" was rejected, sunglasses were rejected ("glasses doesn't solve the eye problem"), and GPT Image 2.6's look was rejected as slop.
+- **What passed:** **one person, face large in frame, on `google/nano-banana-pro`**, with **one named key light at ~45°** that casts a soft shadow under the brow and eyes, natural catchlights from that light, realistic eye reflections, detailed irises, slightly uneven lids mid-laugh, gaze past the camera, real skin (pores, peach fuzz, a few freckles, light natural makeup), 85mm at f/2, and focus on the eyes. Call her "a real girl, not a model".
+- **Cast: women in their early 20s** (21–23), with girlfriends and not mixed groups or older people. Give every person her own hair, skin tone, outfit and jewellery, and a name. Avoid the name "Maya".
+- **Two people at most with visible faces per photo.** Group moments (toasts, dinners, dance floors) become close shots of hands and props: write the prompt about the hands, glasses and table only, and don't describe the people at all. NB Pro ignores "crop at the lips" and draws full, cloned faces if you describe the women.
+- Products in hand pick up brand logos ("Aperol Spritz" appeared on a glass). Say "an unbranded glass" and check every shot for text.
 
 ## 2. Generate (Sume MCP)
 
-- Model: `google/nano-banana-2.1`, `aspect_ratio: "2:3"` (or `"4:5"` for a feed post), `resolution: "2K"`, `output_format: "jpeg"`. It costs about $0.06 per image.
+- Model: `google/nano-banana-pro` for any shot with a visible face; `google/nano-banana-2.1` for places, food, hands and objects. Both take `aspect_ratio: "2:3"` (or `"4:5"` for a feed post), `resolution: "2K"`, `output_format: "jpeg"`. NB 2.1 is about $0.06 per image; check Pro's price with `estimate_image_cost`.
 - Text-only prompts were enough for the approved batch. Escalate only if a shot fails twice:
   - pass 2–3 already-approved photos as style references in `input_references` on `google/nano-banana-pro`
   - or try `openai/gpt-image-2.6` instead
@@ -70,6 +75,8 @@ Read the contact sheet before showing anyone. Regenerate a shot (with a new idem
 Once the shots pass, show the user the images themselves (SendUserFile with `display: "render"`), not just a path.
 
 ## Proven prompts (approved 2026-11-22)
+
+- **Woman, glam portrait (NB Pro, the eye fix):** "A real photograph for an aspirational Instagram feed, shot by a professional lifestyle photographer. Sienna, 22, a real girl not a model: long dark-blonde beach waves with flyaways, a few freckles across her nose, light natural makeup, thin gold necklace, black slip dress, leaning on the glass railing of a rooftop bar at sunset with an unbranded spritz in her hand, laughing at something a friend just said off to the side, her eyes looking past the camera. The low sun is the key light, about 45 degrees to her left: warm light across her face, a soft natural shadow under her brow and eyes, small natural catchlights from the sun, realistic eye reflections, detailed irises, slightly uneven lids from the laugh. A glittering city skyline softly out of focus behind her. 85mm lens at f/2, head and shoulders, sharp focus on her eyes. Real skin texture with visible pores, peach fuzz on her cheek, natural hair texture. Kodak Portra 400 colour. No text, no logos, no watermark, no borders."
 
 - **Pet, indoors:** "Pip, a small wire-haired terrier, grey and tan coat, one ear up and one ear folded, soft white chest patch, a neat beard, sits on a pale oak floor and tilts his head towards someone just out of frame, eyes catching the light. One low window to his left is the only light: a soft warm shaft falls across him and the floor, and the room behind falls off into deep warm shadow. 50mm lens at f/1.8, at his eye level, placed off-centre with dark negative space above."
 - **Pet, golden hour:** "…trots through tall golden grass in a park at sunset, ears bouncing, mouth slightly open and happy, looking off to the side. The low sun behind him is the only light: a glowing golden rim around his fur, the grass backlit, the background melting into soft warm bokeh and darker trees. 85mm lens at f/1.8, at his eye level, the dog off-centre in the lower third."
